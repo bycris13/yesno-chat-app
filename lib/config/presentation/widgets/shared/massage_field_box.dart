@@ -6,6 +6,7 @@ class MassageFieldBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textController = TextEditingController();
+    final focusNode = FocusNode();
     final colors = Theme.of(context).colorScheme;
     // Define un borde personalizado reutilizable con color primario y bordes redondeados
     final outlineInputBorder = OutlineInputBorder(
@@ -22,7 +23,8 @@ class MassageFieldBox extends StatelessWidget {
       filled: true,
       suffixIcon: IconButton(
         onPressed: () {
-          print('Valor de la caja de text');
+          final textValue = textController.value.text;
+          print("Summit $textValue");
           textController.clear();
         },
         icon: const Icon(Icons.send),
@@ -32,10 +34,12 @@ class MassageFieldBox extends StatelessWidget {
       padding: const EdgeInsets.only(top: 5),
       child: TextFormField(
         controller: textController,
+        focusNode: focusNode,
         decoration: inputDecorationTheme,
         onFieldSubmitted: (value) {
           print("Submit: $value");
           textController.clear();
+          focusNode.requestFocus();
         },
       ),
     );
