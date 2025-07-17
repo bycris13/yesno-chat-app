@@ -5,6 +5,7 @@ class MassageFieldBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textController = TextEditingController();
     final colors = Theme.of(context).colorScheme;
     // Define un borde personalizado reutilizable con color primario y bordes redondeados
     final outlineInputBorder = OutlineInputBorder(
@@ -22,6 +23,7 @@ class MassageFieldBox extends StatelessWidget {
       suffixIcon: IconButton(
         onPressed: () {
           print('Valor de la caja de text');
+          textController.clear();
         },
         icon: const Icon(Icons.send),
       ),
@@ -29,9 +31,12 @@ class MassageFieldBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 5),
       child: TextFormField(
+        controller: textController,
         decoration: inputDecorationTheme,
-        onFieldSubmitted: (value) => print("Submit: $value"),
-        onChanged: (value) => print('onChange: $value'),
+        onFieldSubmitted: (value) {
+          print("Submit: $value");
+          textController.clear();
+        },
       ),
     );
   }
