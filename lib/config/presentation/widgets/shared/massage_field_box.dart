@@ -35,6 +35,7 @@ class MassageFieldBox extends StatelessWidget {
       child: TextFormField(
         controller: textController,
         focusNode: focusNode,
+        onTapOutside: (event) => focusNode.unfocus(), //
         decoration: inputDecorationTheme,
         onFieldSubmitted: (value) {
           print("Submit: $value");
