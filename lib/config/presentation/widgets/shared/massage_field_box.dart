@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:yes_no_app/config/presentation/providers/chat_provider.dart';
 
 class MassageFieldBox extends StatelessWidget {
   const MassageFieldBox({super.key});
@@ -8,6 +10,7 @@ class MassageFieldBox extends StatelessWidget {
     final textController = TextEditingController();
     final focusNode = FocusNode();
     final colors = Theme.of(context).colorScheme;
+    final chatProvider = context.watch<ChatProvider>();
     // Define un borde personalizado reutilizable con color primario y bordes redondeados
     final outlineInputBorder = OutlineInputBorder(
       // borderSide: BorderSide(color: colors.primary),
@@ -24,7 +27,7 @@ class MassageFieldBox extends StatelessWidget {
       suffixIcon: IconButton(
         onPressed: () {
           final textValue = textController.value.text;
-          print("Summit $textValue");
+          chatProvider.sendMessage(textValue);
           textController.clear();
         },
         icon: const Icon(Icons.send),
@@ -35,12 +38,13 @@ class MassageFieldBox extends StatelessWidget {
       child: TextFormField(
         controller: textController,
         focusNode: focusNode,
-        onTapOutside: (event) => focusNode.unfocus(), //
+        onTapOutside: (event) =>
+            focusNode.unfocus(), // Baja el teclado al oprimir afuera de este.
         decoration: inputDecorationTheme,
         onFieldSubmitted: (value) {
-          print("Submit: $value");
           textController.clear();
           focusNode.requestFocus();
+          chatProvider.sendMessage(value);
         },
       ),
     );
