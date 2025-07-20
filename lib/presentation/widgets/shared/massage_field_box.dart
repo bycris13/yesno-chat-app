@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yes_no_app/config/presentation/providers/chat_provider.dart';
+import 'package:yes_no_app/presentation/providers/chat_provider.dart';
 
 class MassageFieldBox extends StatelessWidget {
   const MassageFieldBox({required this.onValue, super.key});

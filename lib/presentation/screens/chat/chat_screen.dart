@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yes_no_app/config/presentation/providers/chat_provider.dart';
-import 'package:yes_no_app/config/presentation/widgets/chat/his_message_bubble.dart';
-import 'package:yes_no_app/config/presentation/widgets/chat/my_message_bubble.dart';
-import 'package:yes_no_app/config/presentation/widgets/shared/massage_field_box.dart';
+import 'package:yes_no_app/presentation/providers/chat_provider.dart';
+import 'package:yes_no_app/presentation/widgets/chat/his_message_bubble.dart';
+import 'package:yes_no_app/presentation/widgets/chat/my_message_bubble.dart';
+import 'package:yes_no_app/presentation/widgets/shared/massage_field_box.dart';
 import 'package:yes_no_app/domain/entities/message.dart';
 
 class ChatScreen extends StatelessWidget {
