@@ -40,6 +40,7 @@ class _ChatView extends StatelessWidget {
           children: [
             Expanded(
               child: ListView.builder(
+                controller: chatProvider.chatScrollController,
                 itemCount: chatProvider.messageList.length,
                 itemBuilder: (context, index) {
                   final message = chatProvider.messageList[index];
@@ -51,7 +52,12 @@ class _ChatView extends StatelessWidget {
             ),
 
             // Caja de texto de mensajes.
-            MassageFieldBox(),
+            MassageFieldBox(
+              // Forma larga de enviar el valor.
+              onValue: (value) => chatProvider.sendMessage(value),
+              // De esta forma solo se pasa la referencia a la funcion porque el valor que se envia dentro tiene la misma cantidad de argumentos.
+              // onValue: chatProvider.sendMessage,
+            ),
 
             const SizedBox(height: 10),
           ],
