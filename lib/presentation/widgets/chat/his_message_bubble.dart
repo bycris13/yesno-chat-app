@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app/domain/entities/message.dart';
 
 // Widget que representa una burbuja de mensaje recibido
 class HisMessageBubble extends StatelessWidget {
-  const HisMessageBubble({super.key});
-
+  const HisMessageBubble({required this.message, super.key});
+  final Message message;
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
@@ -18,20 +19,20 @@ class HisMessageBubble extends StatelessWidget {
             color: colors.secondary, // color secundario del tema para el fondo
             borderRadius: BorderRadius.circular(20),
           ),
-          child: const Padding(
+          child: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: 20,
               vertical: 12,
             ), // espacio interno
             child: Text(
-              'Hola mundo', // texto del mensaje
+              message.text, // texto del mensaje
               style: TextStyle(color: Colors.white), // texto en color blanco
             ),
           ),
         ),
         const SizedBox(height: 10), // espacio entre la burbuja y la imagen
         // Imagen del API yesno.
-        _ImageBubble(),
+        _ImageBubble(imageUrl: message.imgUrl!),
 
         const SizedBox(height: 10), // espacio debajo de la imagen
       ],
@@ -41,6 +42,8 @@ class HisMessageBubble extends StatelessWidget {
 
 // Widget privado que muestra la imagen tipo GIF
 class _ImageBubble extends StatelessWidget {
+  final String imageUrl;
+  const _ImageBubble({required this.imageUrl});
   @override
   Widget build(BuildContext context) {
     // Obtiene el tamaño o dimeciones de la pantalla (ancho y alto)
@@ -53,7 +56,7 @@ class _ImageBubble extends StatelessWidget {
       ), // redondea las esquinas de la imagen
       child: Image.network(
         // Carga una imagen desde internet (API yesno.wtf)
-        'https://yesno.wtf/assets/no/10-d5ddf3f82134e781c1175614c0d2bab2.gif',
+        imageUrl,
         width: size.width * 0.6, // 60% del ancho de pantalla
         height: 150, // alto fijo
         fit: BoxFit.cover, // la imagen se recorta para llenar todo el espacio
